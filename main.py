@@ -100,7 +100,6 @@ class Survey():
             elif p.gender == Gender.FEMALE:
                 self.girls.append(p)
             else:
-                print(p)
                 raise ValueError("A person with an unexpected gender was provided ({}, {}). \
                  LoveMatch only currently supports binary gender matching".format(p.name, p.gender))
 
