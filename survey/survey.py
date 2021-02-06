@@ -21,17 +21,17 @@ class Gender(enum.Enum):
 
 class Person():
     def __init__(self, n: Gender, g: str, r: list[str]):
-        if type(n) != str:
+        if not isinstance(n, str):
             raise TypeError("Type of provided value for 'n' must be type 'str' not {}".format(type(n)))
-        if type(g) != Gender:
+        if not isinstance(g, Gender):
             raise TypeError("Type of provided value for 'g' must be type 'Gender' not {}".format(type(n)))
-        if type(r) != list:
-            raise TypeError("Type of provided value for 'r' must be type 'list[str]' not {}".format(type(p2)))
-        else:
+        if isinstance(r, list):
             # validate that all of the elements in the r list are of type str
             for x in r:
-                if type(x) != str:
+                if not isinstance(x, str):
                     raise TypeError("Type of provided value for 'r' must be type 'list[str]' found an element with an invalid type of {}".format(type(x)))
+        else:
+            raise TypeError("Type of provided value for 'r' must be type 'list[str]' not {}".format(type(r)))
 
         self.name = n
         self.gender = g
@@ -44,8 +44,8 @@ class Person():
     def compare(self, p) -> int:
         match_score: int = 0
 
-        if type(p) != Person:
-            raise TypeError("Type of provided value for 'p' must be type 'Person' not {}".format(type(n)))
+        if not isinstance(p, Person):
+            raise TypeError("Type of provided value for 'p' must be type 'Person' not {}".format(type(p)))
 
         # make sure the both people have the same amount of responses before comparing
         # this makes it so that we never get an index error
@@ -60,11 +60,11 @@ class Person():
 
 class Match():
     def __init__(self, p1: str, p2: str, match_score: int):
-        if type(p1) != str:
+        if not isinstance(p1, str):
             raise TypeError("Type of provided value for 'p1' must be type 'str' not {}".format(type(p1)))
-        if type(p2) != str:
+        if not isinstance(p2, str):
             raise TypeError("Type of provided value for 'p2' must be type 'str' not {}".format(type(p2)))
-        if type(match_score) != int:
+        if not isinstance(match_score, int):
             raise TypeError("Type of provided value for 'match_score' must be type 'int' not {}".format(type(match_score)))
 
         self.p1 = p1
@@ -85,13 +85,13 @@ class Survey():
         self.guys: list[Person] = []
         self.girls: list[Person] = []
 
-        if type(people) != list:
-            raise TypeError("Type of provided value for 'people' must be type 'list[Person]' not {}".format(type(p2)))
-        else:
+        if isinstance(people, list):
             # validate that all of the elements in the people list are of type Person
             for p in people:
-                if type(p) != Person:
+                if not isinstance(p, Person):
                     raise TypeError("Type of provided value for 'people' must be type 'list[Person]' found an element with an invalid type of {}".format(type(p)))
+        else:
+            raise TypeError("Type of provided value for 'people' must be type 'list[Person]' not {}".format(type(people)))
 
         for p in people:
             if p.gender == Gender.MALE:
@@ -106,8 +106,8 @@ class Survey():
     def parse_csv(filename: str):
         survey: Survey = None
 
-        if type(filename) != str:
-            raise TypeError("Type of provided value for 'filename' must be type 'str' not {}".format(type(n)))
+        if not isinstance(filename, str):
+            raise TypeError("Type of provided value for 'filename' must be type 'str' not {}".format(type(filename)))
 
         people: list[Person] = []
 
